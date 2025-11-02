@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min Heap Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Min Heap</h1>
+        
+        <div class="controls">
+            <input type="number" id="valueInput" placeholder="Enter value">
+            <button onclick="insert()">Insert</button>
+            <button onclick="removeMin()">Remove Smallest</button>
+            <button onclick="clearHeap()">Clear Heap</button>
+            <button onclick="buildHeap()">BuildHeap</button>
+        </div>
+
+        <div class="animation-controls">
+            <label>Animation Speed:</label>
+            <input type="range" id="speedSlider" min="100" max="2000" value="800" step="100">
+            <span id="speedValue">800ms</span>
+            <button onclick="skipAnimation()" id="skipBtn" disabled title="Skip the animation and jump to the final result">⏩ Skip Animation</button>
+        </div>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="status-bar" id="info">
+                    <strong>Ready to start!</strong> Enter a number and click Insert.
+                </div>
+                
+                <h2>Array Representation</h2>
+                <div class="array-display" id="arrayDisplay"></div>
+                
+                <div class="pseudocode-panel">
+                    <h3>Algorithm Pseudocode</h3>
+                    <div id="pseudocodeDisplay">
+                        <div class="pseudocode-section" id="insertCode" style="display: none;">
+                            <h4>INSERT(value)</h4>
+                            <pre><code><span class="line" data-line="1">1. heap.push(value)</span>
+<span class="line" data-line="2">2. index = heap.length - 1</span>
+<span class="line" data-line="3">3. while index > 0:</span>
+<span class="line" data-line="4">4.   parent = floor((index-1)/2)</span>
+<span class="line" data-line="5">5.   if heap[index] < heap[parent]:</span>
+<span class="line" data-line="6">6.     swap(heap[index], heap[parent])</span>
+<span class="line" data-line="7">7.     index = parent</span>
+<span class="line" data-line="8">8.   else:</span>
+<span class="line" data-line="9">9.     break</span></code></pre>
+                        </div>
+                        <div class="pseudocode-section" id="removeCode" style="display: none;">
+                            <h4>REMOVE_MIN()</h4>
+                            <pre><code><span class="line" data-line="1">1. min = heap[0]</span>
+<span class="line" data-line="2">2. heap[0] = heap.pop()</span>
+<span class="line" data-line="3">3. index = 0</span>
+<span class="line" data-line="4">4. while true:</span>
+<span class="line" data-line="5">5.   left = 2*index + 1</span>
+<span class="line" data-line="6">6.   right = 2*index + 2</span>
+<span class="line" data-line="7">7.   smallest = index</span>
+<span class="line" data-line="8">8.   if left < size AND heap[left] < heap[smallest]:</span>
+<span class="line" data-line="9">9.     smallest = left</span>
+<span class="line" data-line="10">10.  if right < size AND heap[right] < heap[smallest]:</span>
+<span class="line" data-line="11">11.    smallest = right</span>
+<span class="line" data-line="12">12.  if smallest != index:</span>
+<span class="line" data-line="13">13.    swap(heap[index], heap[smallest])</span>
+<span class="line" data-line="14">14.    index = smallest</span>
+<span class="line" data-line="15">15.  else:</span>
+<span class="line" data-line="16">16.    break</span>
+<span class="line" data-line="17">17. return min</span></code></pre>
+                        </div>
+                        <div class="pseudocode-section" id="idleCode">
+                            <p style="color: #666; padding: 20px; text-align: center;">Select an operation to see the algorithm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <h2>Binary Tree</h2>
+                <canvas id="heapCanvas" width="700" height="550"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
